@@ -1,0 +1,16 @@
+<H1> New Datum </H1>
+<%= form_for :datum, url: data_path do |f| %>
+  <p>
+    <%= f.label :device_UUID, size: 36 %><br>
+    <%= f.text_field :uuid %>
+  </p>
+ 
+  <p>
+    <%= f.label :device_data %><br>
+    <%= f.text_area :data %>
+  </p>
+ 
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
