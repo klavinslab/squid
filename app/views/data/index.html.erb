@@ -1,0 +1,15 @@
+<h1> Most recent 100 rows stored </h1>
+
+<table>
+ <tr>
+  <th> id </th>
+  <th> uuid </th>
+ </tr>
+ <% @d.each do |datum| %>
+  <tr>
+    <td><%= datum.id %></td>
+    <td><%= datum.uuid %></td>
+  </tr>  
+ <% end %> 
+
+</table>
