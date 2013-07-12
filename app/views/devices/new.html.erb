@@ -1,0 +1,25 @@
+<h1>New device</h1>
+
+<%= form_for :device, url: devices_path do |f| %>
+  <p>
+    <%#= f.label :device_UUID, size: 36 %><br>
+    <%#= f.text_field :uuid %>
+  </p>
+
+  <p>
+    <%= f.label :device_IP %><br>
+    <%= f.text_field :ip %>
+  </p>
+
+  <p>
+    <%= f.label :device_port %><br>
+    <%= f.number_field :port %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', devices_path %>
+

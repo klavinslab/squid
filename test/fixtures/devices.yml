@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  uuid: MyString
+  status: MyString
+  state: MyText
+  name: MyString
+  ip: MyString
+  port: 1
+
+two:
+  uuid: MyString
+  status: MyString
+  state: MyText
+  name: MyString
+  ip: MyString
+  port: 1

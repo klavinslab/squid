@@ -1,6 +1,9 @@
 SQUID::Application.routes.draw do
   
   resources :data
+  resources :devices
+
+  get 'devices/:id/data(/:start(/:end))(.:format)', to: 'devices#searchdata'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
