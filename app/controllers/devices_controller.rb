@@ -12,17 +12,19 @@ class DevicesController < ApplicationController
     end
   end
 
-  # GET devices/:id/data/(:start)(.:end)
+  # GET devices/:id/data?start=<start>&end=<end>
+  # GET devices/:id/data.json?start=<start>&end=<end>
   def searchdata
     @device = get_device_by_any_id(params[:id])
-    if !params[:start] && !params[:end]
-      @d = @device.data
-    else
-      render text: "start: " + params[:start] + " END:" +params[:end].to_s + "fmt:" +params[:format]
-      return
-    end 
-
-
+    @d = @device.data.order(params[:order]=="ASC"?'id ASC':'id DESC')
+      .limit(params[:limit]||100)
+    if params[:start]
+      @d = @d.where("created_at > :stime", :stime => Time.zone.at(params[:start].to_f))
+    end
+    if params[:end]
+      @d = @d.where("created_at < :etime", :etime => Time.zone.at(params[:end].to_f))
+    end
+                
     respond_to do |format|
       format.html {render "data/index"}
       format.json {render json: @d}

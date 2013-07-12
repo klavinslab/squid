@@ -4,11 +4,13 @@
  <tr>
   <th> id </th>
   <th> uuid </th>
+  <th> created </th>
  </tr>
  <% @d.each do |datum| %>
   <tr>
     <td><%= datum.id %></td>
     <td><%= datum.uuid %></td>
+    <td><%= datum.created_at.to_f %></td>
   </tr>  
  <% end %> 
 
