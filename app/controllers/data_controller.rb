@@ -3,6 +3,7 @@ class DataController < ApplicationController
   def new
   end
 
+  #POST /data
   def create
     @datum = Datum.new(datum_params)
     @datum.save
@@ -16,7 +17,7 @@ class DataController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @datum }
-      format.json {render :json => to_epoch_t(@datum)}
+      format.json {render :json => @datum }
     end
   end
 
@@ -30,7 +31,7 @@ class DataController < ApplicationController
       format.xml  { render :xml => @datum }
       format.json do
         #convert to EPOCH time for easy JSON data exchange.
-        render :json => to_epoch_t(@d.to_a)
+        render :json => @d.to_a
       end
     end
   end
@@ -40,21 +41,6 @@ private
     #the rails tutorials say I should use permit and require
     #but they crash so maybe thats a rails 4 thing.
     params[:datum]
-
-  end
-
-  def to_epoch_t (d)
-    #takes a datum or datum array and changes the date to an epoch time float.
-    if (d.class == Array)
-      d.map do |datum| 
-        datum.created_at = datum.created_at.to_f
-        datum.updated_at = datum.updated_at.to_f
-      end
-    else
-      d.created_at = d.created_at.to_f
-      d.updated_at = d.updated_at.to_f
-    end
-    return d
 
   end
 
