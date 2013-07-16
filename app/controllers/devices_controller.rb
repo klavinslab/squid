@@ -1,6 +1,24 @@
 require 'open-uri'
+require 'net/http'
 
 class DevicesController < ApplicationController
+  # GET
+  # POST /devices/:id/command
+  def command
+    @device = get_device_by_any_id(params[:id])
+    post_data = request.raw_post
+    query = request.query_string.length > 0 ? "?"+request.query_string : ""
+
+    http = Net::HTTP.new(@device.ip,@device.port.to_i)
+    if request.post?
+      resp, data = http.post('/'+query,post_data)
+    else
+      resp, data = http.get('/'+query)
+    end
+    render text: resp.body
+
+  end
+
   # GET /devices
   # GET /devices.json
   def index

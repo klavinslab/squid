@@ -6,6 +6,9 @@ SQUID::Application.routes.draw do
   #get 'devices/:id/data(/:start(/:end))(.:format)', to: 'devices#searchdata'
   get 'devices/:id/data(.:format)', to: 'devices#searchdata'
 
+  get 'devices/:id/command', to: 'devices#command'
+  post 'devices/:id/command', to: 'devices#command'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
