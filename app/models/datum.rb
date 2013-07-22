@@ -9,7 +9,7 @@ class Datum < ActiveRecord::Base
   end
 
   def updated_at
-    updated_at= attributes["created_at"]
+    updated_at= attributes["updated_at"]
     updated_at ? updated_at.to_f : nil
   end
 end
