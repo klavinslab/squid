@@ -1,3 +1,22 @@
 // Place all the styles related to the data controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+table
+{
+	border-collapse:collapse;
+}
+table, th, td 
+{
+	border: 1px solid black;
+}
+th 
+{
+	background-color: green;
+	color:white;
+}
+tr:nth-child(odd)		{ background-color:#bfb; }
+tr:nth-child(even)		{ background-color:#fff; }
+td
+{
+	padding: 0 10px ;
+}
