@@ -5,12 +5,14 @@
   <th> id </th>
   <th> uuid </th>
   <th> created </th>
+  <th> data  </th>
  </tr>
  <% @d.each do |datum| %>
   <tr>
     <td><%= datum.id %></td>
-    <td><%= datum.uuid %></td>
+    <td class="uuid"><%= datum.uuid %></td>
     <td><%= datum.created_at.to_f %></td>
+    <td><%= datum.data.length >50?datum.data[0,47]+"...":datum.data %></td>
   </tr>  
  <% end %> 
 

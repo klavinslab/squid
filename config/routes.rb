@@ -9,6 +9,8 @@ SQUID::Application.routes.draw do
   get 'devices/:id/command', to: 'devices#command'
   post 'devices/:id/command', to: 'devices#command'
 
+  root to: "devices#index"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -1,11 +1,11 @@
-<h1>Listing devices</h1>
+<h1>SQUID devices</h1>
 
 <table>
   <tr>
+    <th>Name</th>
     <th>Uuid</th>
     <th>Status</th>
     <th>State</th>
-    <th>Name</th>
     <th>Ip</th>
     <th>Port</th>
     <th></th>
@@ -15,15 +15,15 @@
 
 <% @devices.each do |device| %>
   <tr>
-    <td><%= device.uuid %></td>
+    <td><%= device.name %></td>
+    <td class='uuid'><%= device.uuid %></td>
     <td><%= device.status %></td>
     <td><%= device.state %></td>
-    <td><%= device.name %></td>
     <td><%= device.ip %></td>
     <td><%= device.port %></td>
     <td><%= link_to 'Show', device %></td>
-    <td><%= link_to 'Edit', edit_device_path(device) %></td>
     <td><%= link_to 'Destroy', device, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Data', controller: "devices", action: "searchdata", id: device.uuid  %></td>
   </tr>
 <% end %>
 </table>
