@@ -6,4 +6,26 @@ class Device < ActiveRecord::Base
   
   has_many :data, foreign_key: 'uuid', primary_key: 'uuid'
 
+  def acquire(squidport)
+    begin
+      open("http://#{self.ip}:#{self.port}/?cmd=acquire&port=#{squidport}")
+    rescue OpenURI::HTTPError =>the_error
+      return false
+    rescue Errno::ECONNREFUSED
+      return false
+    end
+    return true
+  end
+
+  def ping
+    begin
+      open("http://#{self.ip}:#{self.port}/?cmd=info", :read_timeout => 1)
+    rescue OpenURI::HTTPError =>the_error
+      return false
+    rescue Errno::ECONNREFUSED
+      return false
+    end
+    return true
+  end
+
 end

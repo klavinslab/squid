@@ -37,10 +37,12 @@ class DevicesController < ApplicationController
     @d = @device.data.order(params[:order]=="ASC"?'id ASC':'id DESC')
       .limit(params[:limit]||100)
     if params[:start]
-      @d = @d.where("created_at > :stime", :stime => Time.zone.at(params[:start].to_f))
+      @d = @d.where("created_at > :stime", 
+        :stime => Time.zone.at(params[:start].to_f))
     end
     if params[:end]
-      @d = @d.where("created_at < :etime", :etime => Time.zone.at(params[:end].to_f))
+      @d = @d.where("created_at < :etime", 
+        :etime => Time.zone.at(params[:end].to_f))
     end
                 
     respond_to do |format|
@@ -74,19 +76,22 @@ class DevicesController < ApplicationController
   # POST /devices
   def create
     #exceptions thrown by open should be caught.
-    open("http://"+params[:device][:ip]+":"+params[:device][:port]+"/?cmd=info", 
+    #for now rails does a good job to displaying those exceptions
+    open("http://"+params[:device][:ip]+":"+params[:device][:port]+"/?cmd=info",
          :read_timeout => 5.0) do |body|
       @info = ActiveSupport::JSON.decode(body)
     end
-    open("http://"+params[:device][:ip]+":"+params[:device][:port]+
-         "/?cmd=acquire&port="+request.port.to_s) 
 
     device_info = params[:device].merge(@info)
     @device = Device.new(device_info)
 
-
     if @device.save
-      redirect_to @device, notice: 'Device was successfully created.' 
+      if @device.acquire request.port
+        redirect_to @device, 
+          notice: 'Device was successfully created and acquired.' 
+      else
+        redirect_to @device, notice: 'Device was created, but acquire failed.' 
+      end
     else
       render action: "new"
     end
@@ -99,11 +104,13 @@ class DevicesController < ApplicationController
 
     respond_to do |format|
       if @device.update_attributes(params[:device])
-        format.html { redirect_to @device, notice: 'Device was successfully updated.' }
+        format.html { redirect_to @device, 
+            notice: 'Device was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
-        format.json { render json: @device.errors, status: :unprocessable_entity }
+        format.json { render json: @device.errors, 
+            status: :unprocessable_entity }
       end
     end
   end
