@@ -13,7 +13,9 @@ namespace :squid do
             device.touch
             puts "device #{device.name} fonud"
             if device.acquire 3008
-              puts "device #{device.name} is alive but could not be acquired"
+              puts "device #{device.name} acquired"
+            else
+              puts "device #{device.name} could not be acquired"
             end
           else
             puts "device #{device.name} has refused the connection or errored"
