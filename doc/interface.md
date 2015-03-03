@@ -20,7 +20,7 @@ Currently undefined.  Caller should assume success if http status is something o
     
 __example:__
   
-    curl --data "datum[uuid]=theuuidhere&datum[data]=the data" http://bioturk:3008/data
+    curl --data "datum[uuid]=theuuidhere&datum[data]=the data" http://example.com:3008/data
 
 
 Viewing A Datum
@@ -41,7 +41,7 @@ and modification date in epoch time format
 
 __example:__
 
-    curl http://bioturk:3008/data/3.json
+    curl http://example.com:3008/data/3.json
     
 Retrieving Recent Data
 ----------------------
@@ -61,7 +61,7 @@ __Response:__
 
 __example:__
 
-    curl http://bioturk:3008/data.json
+    curl http://example.com:3008/data.json
 
 Searching Data by device and time
 ---------------------------------
@@ -91,7 +91,7 @@ data: gives a human readable list.  As above format is undefined.
 
 __example:__
 
-    curl http://bioturk:3008/devices/oeui/data.json?limit=25&start=1234567890
+    curl http://example.com:3008/devices/oeui/data.json?limit=25&start=1234567890
 
 Sending commands to a device
 ----------------------------
@@ -116,4 +116,4 @@ The message body from the device.  HTML headers are not preserved.
 
 __example:__
 
-    curl http://bioturk:3008/devices/85fcf1ce-ca46-53e0-be4c-1f4b5c24790d/command?cmd=info
+    curl http://example.com:3008/devices/85fcf1ce-ca46-53e0-be4c-1f4b5c24790d/command?cmd=info
